@@ -41,7 +41,7 @@ worksheet = workbook['RAW']
 
 
 print("** generating outputfile ....")
-create_time = time.strftime('%y%m%d%H%M%S', time.localtime(time.time()))
+create_time = time.strftime('%H%M', time.localtime(time.time()))
 new_workbook = Workbook(file_name+"_out_"+ create_time +".xlsx")
 
 print("** "+ file_name +"_out_"+create_time+".xlsx"+" generated")
@@ -54,7 +54,7 @@ new_workbook= openpyxl.load_workbook(path+ "/" +file_name+"_out_"+create_time+".
 new_worksheet = new_workbook['RAW']
 
 contents = KR_2020[["subcategory","App","OS"]]
-# extracts only these two cols
+# extracts only these three cols
 
 need_edit_set = {}
 need_edit_set = set()
