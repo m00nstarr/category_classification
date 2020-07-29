@@ -53,7 +53,7 @@ new_workbook.save(file_name+"_out_"+create_time+".xlsx")
 new_workbook= openpyxl.load_workbook(path+ "/" +file_name+"_out_"+create_time+".xlsx")
 new_worksheet = new_workbook['RAW']
 
-contents = KR_2020[["subcategory","App"]]
+contents = KR_2020[["subcategory","App","OS"]]
 # extracts only these two cols
 
 need_edit_set = {}
@@ -82,6 +82,7 @@ null_edit = list(null_edit_set)
 count =0
 for i in range(len(contents)):
   sub_name = contents['subcategory'][i]
+  os_name = contents['OS'][i]
 
   if sub_name == "Sports":
     need_edit_set.add( contents['App'][i])
@@ -92,7 +93,7 @@ for i in range(len(contents)):
     or sub_name =="Card" or sub_name == "Casino" or sub_name == "Casual"\
     or sub_name == "Puzzle" or sub_name == "Racing" or sub_name == "Role Playing"\
     or sub_name == "Simulation" or sub_name == "Sportsgame" \
-    or sub_name =="Strategy" or sub_name =="Trivia" or sub_name == "Word":
+    or sub_name =="Strategy" or sub_name =="Trivia" or sub_name == "Word" or (sub_name =="Music" and os_name == "AND") :
     
     new_worksheet.cell(row=i + 2, column=column_index_from_string('i')).value = "Games"
 
@@ -124,15 +125,16 @@ for i in range(len(contents)):
   elif sub_name == "News & Magazines" :
     new_worksheet.cell(row=i + 2, column=column_index_from_string('i')).value = "News"
 
-  elif sub_name == "Tools":
+  elif sub_name == "Tools" or sub_name =="Libraries & Demo":
     new_worksheet.cell(row=i + 2, column=column_index_from_string('i')).value = "Utilities"
 
   elif sub_name == "Maps & Navigations":
     new_worksheet.cell(row=i + 2, column=column_index_from_string('i')).value = "Navigation"
 
-  elif sub_name == "Music & Audio":
+  elif sub_name == "Music & Audio" or sub_name =="Music":
     new_worksheet.cell(row=i + 2, column=column_index_from_string('i')).value = "Music"
-
+    if os_name == "IOS":
+      need_edit_set.add(contents['App'][i])
   elif sub_name == "Comics":
     new_worksheet.cell(row=i + 2, column=column_index_from_string('i')).value = "Entertainment"
 
@@ -161,7 +163,9 @@ need_edit = list(need_edit_set)
 print()
 print("updating confusing application")
 print("==============================")
+
 for app_name in need_edit:
+  print()
   print("'"+app_name +"'")
   print("Game ? (y/n) " )
 
