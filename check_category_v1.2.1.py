@@ -151,7 +151,7 @@ need_edit = list(need_edit_set)
 
 
 print()
-print("Need to update"+ str(len(need_edit)) + " confusing application(s)")
+print("Need to update "+ str(len(need_edit)) + " confusing application(s)")
 print("==============================")
 
 number=1
