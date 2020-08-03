@@ -139,7 +139,7 @@ print("** fills industry filed of " +str(count)+ " records")
 
 if count != KR_2020.shape[0]:
   blank_count = KR_2020.shape[0] - count +1 
-  print("There are" + str(blank_count) + " blank(s) industry field")
+  print("There are " + str(blank_count) + " blank(s) industry field")
   print("need to check")
 # sports need to be edited. (mixed subcategory)
 
