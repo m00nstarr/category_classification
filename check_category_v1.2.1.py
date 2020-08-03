@@ -76,7 +76,8 @@ for i in range(len(contents)):
   os_name = contents['OS'][i]
 
   if sub_name == "Sports":
-    need_edit_set.add( contents['App'][i])
+    if os_name == "AND":
+      need_edit_set.add( contents['App'][i])
     new_worksheet.cell(row=i + 2, column=column_index_from_string('i')).value = "Sports"
 
   elif sub_name == "Action" or sub_name =="Adventure" \
@@ -150,13 +151,15 @@ need_edit = list(need_edit_set)
 
 
 print()
-print("updating confusing application")
+print("Need to update"+ str(len(need_edit)) + " confusing application(s)")
 print("==============================")
 
+number=1
 for app_name in need_edit:
   print()
-  print("'"+app_name +"'")
+  print(str(number)+"."+"'"+app_name +"'")
   print("Game ? (y/n) " )
+
 
   while True:
     ans = input()
@@ -164,9 +167,12 @@ for app_name in need_edit:
     if ans == "y":
       for i in np.where(KR_2020["App"] == app_name)[0]:
         new_worksheet.cell(row =i+2, column = column_index_from_string('i')).value = "Games"
+      
+      number= number+1
       break
 
     elif ans == "n":
+      number= number+1
       break
 
     else:
